@@ -61,6 +61,7 @@ export const TestConnectionButton = styled(Button)`
 
 export const ContainerDropZone = styled.div`
   width: 100%;
+  margin-top: 20px;
 `
 
 export const ContainerPreviews = styled.ul`

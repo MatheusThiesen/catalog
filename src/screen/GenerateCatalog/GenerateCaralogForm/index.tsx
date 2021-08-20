@@ -134,7 +134,7 @@ const GenerateCaralogForm: React.FC = () => {
 
         <Input name="file" notView={true} />
 
-        <DownloadFile className="download-file">
+        {/* <DownloadFile className="download-file">
           <button type="button" onClick={downloadDefaultFile}>
             Baixar planilha modelo
             <span>
@@ -142,7 +142,7 @@ const GenerateCaralogForm: React.FC = () => {
               <MdArrowDownward color="#207245" size={14} />
             </span>
           </button>
-        </DownloadFile>
+        </DownloadFile> */}
         <ContainerDropZone>
           <Dropzone
             accept={[

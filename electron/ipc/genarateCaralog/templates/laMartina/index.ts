@@ -40,13 +40,8 @@ export function generateHtml(data: CatalagoProps[]) {
       <div class="page">
       <header class="header">
         <img src="${path.resolve(
-          app.getAppPath(),
-          'electron',
-          'ipc',
-          'genarateCaralog',
-          'templates',
-          'laMartina',
-          'header.png'
+          pagina.pathFile,
+          'cabaecalho.png'
         )}" alt="Cabecalho" />
       </header>
       <div class="content">
@@ -77,13 +72,8 @@ export function generateHtml(data: CatalagoProps[]) {
       </div>
       <footer class="footer">
         <img src="${path.resolve(
-          app.getAppPath(),
-          'electron',
-          'ipc',
-          'genarateCaralog',
-          'templates',
-          'laMartina',
-          'footer.png'
+          pagina.pathFile,
+          'rodape.png'
         )}" alt="Rodape" />
       </footer>
     </div>

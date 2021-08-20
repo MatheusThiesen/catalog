@@ -33,6 +33,8 @@ interface CatalagoNormalized {
   cores: CoresProps[]
 
   staticImage?: boolean
+
+  pathFile: string
 }
 
 interface CoresProps {
@@ -101,6 +103,7 @@ async function normalizedData(props: NormalizedDataProps) {
         fotoDetalhe: Number(item.tipo) === 2 ? image : undefined,
         staticImage: Number(item.tipo) === 4,
         fotoStatic: image,
+        pathFile: pathImages,
         cores:
           Number(item.tipo) === 3
             ? [

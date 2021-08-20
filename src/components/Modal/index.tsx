@@ -5,6 +5,7 @@ import { Container } from './styles'
 
 export interface SharedModalProps {
   visible?: boolean
+  isClose?: boolean
   onRequestClose?: () => void
 }
 
@@ -13,6 +14,7 @@ type ModalProps = React.PropsWithChildren<SharedModalProps>
 const Modal: React.FC<ModalProps> = ({
   visible = false,
   onRequestClose,
+  isClose,
   children
 }) => {
   const [isOpen, setIsOpen] = useState(visible)
@@ -33,7 +35,7 @@ const Modal: React.FC<ModalProps> = ({
     <ReactModal
       appElement={document.getElementById('modal') as HTMLElement}
       shouldCloseOnEsc={true}
-      onRequestClose={handleModalClose}
+      onRequestClose={isClose ? undefined : handleModalClose}
       overlayClassName="modal-overlay"
       className="modal-content"
       isOpen={isOpen}

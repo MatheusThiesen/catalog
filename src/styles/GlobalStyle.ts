@@ -63,9 +63,9 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   .modal-content {
-    width: 500px;
-    background: ${props => props.theme.backgrounds.dark};
-    border: 1px solid #322D41;
+    /* width: 500px; */
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid ${props => props.theme.colors.opaque};
     padding: 16px;
     border-radius: 4px;
     box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.3);
@@ -81,11 +81,11 @@ export const GlobalStyle = createGlobalStyle`
     border-radius: 4px;
     background: rgba(255, 255, 255, 0.05);
   }
-  
+
   ::-webkit-scrollbar-track {
     border-radius: 4px;
   }
-  
+
   ::-webkit-scrollbar-thumb {
     background: rgba(255, 255, 255, 0.1);
     border-radius: 4px;

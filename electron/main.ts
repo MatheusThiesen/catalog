@@ -9,10 +9,10 @@ import {
   dialog
 } from 'electron'
 import { autoUpdater } from 'electron-updater'
-import * as fs from 'fs'
 import * as path from 'path'
 import * as url from 'url'
 import { writeFile } from './ipc/genarateCaralog'
+import { selectDirectory } from './ipc/selectDirectory'
 
 import i18n from '../i18n'
 import {
@@ -144,30 +144,17 @@ async function registerListeners() {
   })
 
   ipcMain.on('download-default-file', async (_event, file) => {
-    const result = dialog.showSaveDialogSync(
-      mainWindow as Electron.BrowserWindow,
-      {}
-    )
-
-    if (result !== undefined) {
-      fs.copyFile(
-        path.resolve(__dirname, '..', 'import', file),
-        result + '.xlsx',
-        err => {
-          if (err) throw err
-        }
-      )
-
-      setTimeout(() => {
-        shell.openPath(result + '.xlsx')
-      }, 300)
-    }
+    selectDirectory(file)
   })
 
-  ipcMain.on('generate-catalog', (_, props) => {
-    writeFile(props)
-      .then(() => console.log('Gerado'))
-      .catch(e => console.log(e))
+  ipcMain.on('generate-file', async (event, props) => {
+    try {
+      await writeFile(props)
+
+      event.reply('generated-file', { error: false, generated: true })
+    } catch (error) {
+      event.reply('generated-file', { error: true, description: error })
+    }
   })
 }
 

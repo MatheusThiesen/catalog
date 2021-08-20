@@ -5,13 +5,7 @@ import * as fs from 'fs'
 import * as path from 'path'
 
 export function selectDirectory(file: string) {
-  const result = dialog.showSaveDialogSync(
-    mainWindow as Electron.BrowserWindow,
-    {
-      filters: [{ name: 'Default', extensions: ['xls'] }],
-      title: file
-    }
-  )
+  const result = dialog.showSaveDialogSync(mainWindow as Electron.BrowserWindow)
 
   if (result !== undefined) {
     fs.copyFile(

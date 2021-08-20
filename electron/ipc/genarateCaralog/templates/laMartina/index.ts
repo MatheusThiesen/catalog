@@ -1,3 +1,4 @@
+import { app } from 'electron'
 import { CatalagoProps } from '../index'
 import path from 'path'
 
@@ -39,8 +40,7 @@ export function generateHtml(data: CatalagoProps[]) {
       <div class="page">
       <header class="header">
         <img src="${path.resolve(
-          __dirname,
-          '..',
+          app.getAppPath(),
           'electron',
           'ipc',
           'genarateCaralog',
@@ -77,9 +77,7 @@ export function generateHtml(data: CatalagoProps[]) {
       </div>
       <footer class="footer">
         <img src="${path.resolve(
-          __dirname,
-          __dirname,
-          '..',
+          app.getAppPath(),
           'electron',
           'ipc',
           'genarateCaralog',

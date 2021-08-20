@@ -69,26 +69,26 @@ async function createMenu() {
   await i18n.loadNamespaces('applicationMenu')
 
   const template: MenuItemConstructorOptions[] = [
-    {
-      label: 'Rocketredis',
-      submenu: [
-        {
-          label: i18n.t('applicationMenu:newConnection'),
-          accelerator: 'CmdOrCtrl+N',
-          click: () => {
-            mainWindow?.webContents.send('newConnection')
-          }
-        },
-        {
-          type: 'separator'
-        },
-        {
-          label: i18n.t('applicationMenu:exit'),
-          role: 'quit',
-          accelerator: 'CmdOrCtrl+Q'
-        }
-      ]
-    },
+    // {
+    //   label: 'Rocketredis',
+    //   submenu: [
+    //     {
+    //       label: i18n.t('applicationMenu:newConnection'),
+    //       accelerator: 'CmdOrCtrl+N',
+    //       click: () => {
+    //         mainWindow?.webContents.send('newConnection')
+    //       }
+    //     },
+    //     {
+    //       type: 'separator'
+    //     },
+    //     {
+    //       label: i18n.t('applicationMenu:exit'),
+    //       role: 'quit',
+    //       accelerator: 'CmdOrCtrl+Q'
+    //     }
+    //   ]
+    // },
     {
       label: 'View',
       submenu: [
@@ -109,7 +109,7 @@ async function createMenu() {
         {
           label: 'Learn More',
           click: () => {
-            shell.openExternal('https://github.com/diego3g/rocketredis/')
+            shell.openExternal('https://github.com/matheusthiesen/catalog/')
           }
         }
       ]
@@ -147,13 +147,13 @@ async function registerListeners() {
     selectDirectory(file)
   })
 
-  ipcMain.on('generate-file', async (event, props) => {
+  ipcMain.on('generate-catalog', async (event, props) => {
     try {
       await writeFile(props)
 
-      event.reply('generated-file', { error: false, generated: true })
+      event.returnValue = { error: false, generated: true }
     } catch (error) {
-      event.reply('generated-file', { error: true, description: error })
+      event.returnValue = { error: true, description: error }
     }
   })
 }

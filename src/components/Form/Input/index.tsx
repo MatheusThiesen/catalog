@@ -59,7 +59,7 @@ const Input: React.FC<InputProps> = ({
 
   return (
     <Container
-      style={notView ? { position: 'absolute', opacity: 0.1 } : undefined}
+      style={notView ? { position: 'absolute', opacity: 0 } : undefined}
     >
       <TitleContainer>
         {label && <label htmlFor={fieldName}>{label}</label>}

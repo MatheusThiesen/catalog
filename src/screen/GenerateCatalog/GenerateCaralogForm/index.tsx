@@ -1,11 +1,10 @@
-import React, { useRef, useCallback, memo, useState } from 'react'
+import React, { useRef, useCallback, useState } from 'react'
 import { FaFileDownload } from 'react-icons/fa'
 import { FcOpenedFolder } from 'react-icons/fc'
 import { FiAlertCircle } from 'react-icons/fi'
 import { IoMdTrash } from 'react-icons/io'
 import { MdArrowDownward } from 'react-icons/md'
 import { RiFileExcel2Fill } from 'react-icons/ri'
-import { useToggle } from 'react-use'
 
 import { FormHandles } from '@unform/core'
 import { Form } from '@unform/web'
@@ -46,6 +45,7 @@ const GenerateCaralogForm: React.FC = () => {
     async (data: ConnectionFormData) => {
       try {
         formRef.current?.setErrors({})
+        setLoading(true)
 
         const schema = Yup.object().shape({
           template: Yup.string().required(),
@@ -60,37 +60,35 @@ const GenerateCaralogForm: React.FC = () => {
         })
         try {
           const { pathImages, template, file } = data
-          ipcRenderer.send('generate-catalog', {
+          await ipcRenderer.sendSync('generate-catalog', {
             template: template,
             pathImages: pathImages,
             pathFile: file
           })
 
-          ipcRenderer.on(' generated-file', (_event, arg) => {
-            console.log('heyyyy', arg)
-          })
-
           addToast({
             type: 'success',
             title: 'Catálago gerado com sucesso',
-            description: '',
-            notTimer: true
+            description: ''
           })
+          setLoading(false)
         } catch (err) {
           addToast({
             type: 'error',
             title: 'Error saving connection',
             description: err.message || 'Unexpected error occurred, try again.'
           })
+          setLoading(false)
         }
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err)
+          setLoading(false)
 
           formRef.current?.setErrors(errors)
         }
       } finally {
-        // toggleCreateConnectionLoading()
+        setLoading(false)
       }
     },
     [addToast]
@@ -213,4 +211,4 @@ const GenerateCaralogForm: React.FC = () => {
   )
 }
 
-export default memo(GenerateCaralogForm)
+export default GenerateCaralogForm

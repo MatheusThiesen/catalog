@@ -1,4 +1,4 @@
-import { dialog, shell } from 'electron'
+import { dialog, shell, app } from 'electron'
 import { mainWindow } from '../main'
 
 import * as fs from 'fs'
@@ -8,22 +8,22 @@ export function selectDirectory(file: string) {
   const result = dialog.showSaveDialogSync(
     mainWindow as Electron.BrowserWindow,
     {
-      filters: [{ name: 'Default', extensions: ['xlsx'] }],
+      filters: [{ name: 'Default', extensions: ['xls'] }],
       title: file
     }
   )
 
   if (result !== undefined) {
     fs.copyFile(
-      path.resolve(__dirname, '..', 'import', file),
-      result + '.xlsx',
+      path.resolve(app.getAppPath(), 'import', file),
+      result + '.xls',
       err => {
         if (err) throw err
       }
     )
 
     setTimeout(() => {
-      shell.openPath(result + '.xlsx')
+      shell.openPath(result + '.xls')
     }, 300)
   }
 }

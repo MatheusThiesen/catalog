@@ -41,7 +41,7 @@ export function generateHtml(data: CatalagoProps[]) {
       <header class="header">
         <img src="${path.resolve(
           pagina.pathFile,
-          'cabaecalho.png'
+          'cabecalho.png'
         )}" alt="Cabecalho" />
       </header>
       <div class="content">
@@ -59,6 +59,10 @@ export function generateHtml(data: CatalagoProps[]) {
             <div class="container-texts">
               <span>GRADE : <b>${pagina.grade}</b></span>
               <span>COMPOSIÇÃO: <b>${pagina.composicao}</b></span>
+              <span>PREÇO: <b>${Number(pagina.preco).toLocaleString('pt-br', {
+                style: 'currency',
+                currency: 'BRL'
+              })}</b></span>
             </div>
             <div class="container-float-color">
               <span>COR: <b>${pagina.cor}</b></span>

@@ -4,6 +4,7 @@ import XLSX from 'xlsx'
 
 import { dialog } from 'electron'
 import { mainWindow } from '../../main'
+import { CatalagoProps as CatalagoNormalized } from './templates'
 
 import tamplates from './templates'
 
@@ -15,25 +16,6 @@ export interface GenarateCaralogProps {
 
 interface NormalizedDataProps {
   pathImages: string
-  pathFile: string
-}
-
-interface CatalagoNormalized {
-  pagina: number
-  referencia?: string
-  caracteristicas?: string
-  composicao?: string
-  grade?: string
-  cor?: string
-
-  fotoPrincipal: string | undefined
-  fotoDetalhe: string | undefined
-  fotoStatic?: string | undefined
-
-  cores: CoresProps[]
-
-  staticImage?: boolean
-
   pathFile: string
 }
 
@@ -50,6 +32,7 @@ interface CatalogoReciveProps {
   caracteristicas: string
   grade: string
   composicao: string
+  preco: string
   cor: string
   imagem: string
 }
@@ -97,6 +80,7 @@ async function normalizedData(props: NormalizedDataProps) {
         grade: String(item.grade),
         caracteristicas: String(item.caracteristicas),
         composicao: String(item.composicao),
+        preco: Number(item.preco),
         referencia: String(item.referencia),
         cor: String(item.cor),
         fotoPrincipal: Number(item.tipo) === 1 ? image : undefined,

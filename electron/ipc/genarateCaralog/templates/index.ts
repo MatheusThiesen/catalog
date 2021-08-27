@@ -6,6 +6,7 @@ export interface CatalagoProps {
   referencia?: string
   caracteristicas?: string
   composicao?: string
+  preco?: number
   grade?: string
   cor?: string
 

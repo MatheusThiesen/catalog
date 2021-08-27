@@ -51,7 +51,7 @@ export function generateHtml(data: CatalagoProps[]) {
             <div class="container-texts">
               <span>REFERÊNCIA : <b>${pagina.referencia}</b></span>
               <span
-                >CARACTERÍSTICAS: : <b>${pagina.caracteristicas}</b></span>
+                >CARACTERÍSTICAS: <b>${pagina.caracteristicas}</b></span>
             </div>
           </div>
           <div class="content-main">
